@@ -17,7 +17,6 @@
           tny
         </span>
         dot town</h1>
-      <h2 class="text-2xl my-2">channeled by Andrew Pan</h2>
     </div>
     <nav class="p-8 text-2xl font-mono">
       <ul class="m-auto">
@@ -28,16 +27,19 @@
     </nav>
   </div>
   {% set posts = get_section(path="posts/_index.md") %}
-  {% set post = posts.pages.0 %}
+  {% set post = posts.pages | first %}
+  {% if post != "" %}
   <a class="bg-gray-800 hover:bg-gray-700"
      href="{{ post.permalink }}">
-    <div class="hidden md:flex flex-col m-auto items-center">
-    <h1 class="text-3xl">latest post: {{ post.title }}</h1>
+      <div class="hidden md:flex flex-col m-auto items-center">
+        <h1 class="text-3xl">latest post: {{ post.title }}</h1>
     <article class="my-2 z-10">
-      <div class="prose prose-lg prose-dark prose-yellow max-w-xl">{{ post.summary | safe }}</div>
+        <div class="prose prose-lg prose-dark prose-yellow max-w-xl">{{ post.summary | safe }}</div>
     </article>
     <span class="hover:underline text-1xl">read more →</span>
-     </div></a>
+     </div>
+  </a>
+  {% endif %}
   <img class="absolute bottom-0 max-w-[16rem] mx-auto left-0 right-0 md:left-auto"
        alt="digital art of cute cat"
        src="{{ get_url(path='sakamoto_nobg.png') }}" />
